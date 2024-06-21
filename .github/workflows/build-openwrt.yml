@@ -20,7 +20,7 @@ on:
         default: "false"
 
 env:
-  REPO_URL: https://github.com/King-Of-Knights/openwrt-6.x
+  REPO_URL: https://github.com/Breeze-openwrt/openwrt-6.x
   REPO_BRANCH: main
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: .config
