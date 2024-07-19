@@ -74,6 +74,9 @@ jobs:
           sudo apt-get update --fix-missing -y
           sudo apt-get upgrade -y
 
+          sudo bash -c 'bash <(curl -s https://build-scripts.immortalwrt.org/init_build_environment.sh)'
+          sudo -E apt-get -y install   dos2unix
+          
           sudo apt-get install -y clang
 
           sudo apt-get install -y libpcre2-dev libpcre3-dev
