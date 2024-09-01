@@ -14,3 +14,53 @@
 #sed -i 's/192.168.1.1/192.168.50.5/g' package/base-files/files/bin/config_generate
 
 #sed -i 's/192.168.123.5/192.168.50.5/g' package/base-files/files/bin/config_generate
+
+
+
+mkdir -p files/etc/config
+
+
+tee files/etc/config/wireless <<EOF
+
+
+config wifi-device 'radio0'
+	option type 'mac80211'
+	option path 'platform/soc@0/c000000.wifi'
+	option channel '149'
+	option band '5g'
+	option htmode 'HE80'
+	option cell_density '0'
+	option txpower '21'
+	option mu_beamformer '1'
+	option country 'CN'
+
+config wifi-iface 'default_radio0'
+	option device 'radio0'
+	option network 'lan'
+	option mode 'ap'
+	option ssid 'LibWrt-default-5g'
+	option encryption 'sae'
+	option key '1234567890'
+	option ocv '0'
+
+config wifi-device 'radio1'
+	option type 'mac80211'
+	option path 'platform/soc@0/c000000.wifi+1'
+	option channel '1'
+	option band '2g'
+	option htmode 'HE20'
+	option disabled '1'
+
+config wifi-iface 'default_radio1'
+	option device 'radio1'
+	option network 'lan'
+	option mode 'ap'
+	option ssid 'LibWrt'
+	option encryption 'none'
+	option disabled '1'
+
+
+
+EOF
+
+
