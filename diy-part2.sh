@@ -64,3 +64,54 @@ config wifi-iface 'default_radio1'
 EOF
 
 
+tee files/etc/config/network <<EOF
+
+
+
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config globals 'globals'
+
+config device
+	option name 'br-lan'
+	option type 'bridge'
+	list ports 'eth0'
+	list ports 'eth1'
+	list ports 'eth2'
+
+config interface 'lan'
+	option device 'br-lan'
+	option proto 'static'
+	option ipaddr '192.168.123.23'
+	option netmask '255.255.255.0'
+	option ip6assign '60'
+	list dns '223.5.5.5'
+	list dns '223.6.6.6'
+	option ip6ifaceid 'eui64'
+
+config interface 'wan'
+	option device 'eth3'
+	option proto 'static'
+	option ipaddr '192.168.1.228'
+	option netmask '255.255.255.0'
+	option gateway '192.168.1.1'
+	list dns '223.5.5.5'
+	list dns '223.6.6.6'
+
+config interface 'wan6'
+	option device '@wan'
+	option proto 'dhcpv6'
+	option reqaddress 'try'
+	option reqprefix 'auto'
+
+
+
+
+
+EOF
+
+
