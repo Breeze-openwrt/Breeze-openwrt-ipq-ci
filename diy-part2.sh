@@ -115,3 +115,62 @@ config interface 'wan6'
 EOF
 
 
+
+
+tee files/etc/config/dhcp <<EOF
+
+
+
+  
+config dnsmasq
+	option domainneeded '1'
+	option localise_queries '1'
+	option rebind_protection '1'
+	option rebind_localhost '1'
+	option local '/lan/'
+	option domain 'lan'
+	option expandhosts '1'
+	option cachesize '1000'
+	option authoritative '1'
+	option readethers '1'
+	option leasefile '/tmp/dhcp.leases'
+	option localservice '1'
+	option ednspacket_max '1232'
+	list server '223.5.5.5'
+	list server '223.6.6.6'
+	option localuse '1'
+
+config dhcp 'lan'
+	option interface 'lan'
+	option start '100'
+	option limit '100'
+	option leasetime '12h'
+	option dhcpv4 'server'
+	option ra 'server'
+	option dns_service '0'
+	list ra_flags 'other-config'
+	option max_preferred_lifetime '2700'
+	option max_valid_lifetime '5400'
+
+config dhcp 'wan'
+	option interface 'wan'
+	option ignore '1'
+	option start '100'
+	option limit '150'
+	option leasetime '12h'
+
+config odhcpd 'odhcpd'
+	option maindhcp '0'
+	option leasefile '/tmp/hosts/odhcpd'
+	option leasetrigger '/usr/sbin/odhcpd-update'
+	option loglevel '4'
+
+
+
+
+
+
+
+EOF
+
+
