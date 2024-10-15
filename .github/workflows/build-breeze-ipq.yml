@@ -8,7 +8,7 @@
 # Description: Build OpenWrt using GitHub Actions
 #
 
-name: Build VIKINGYFY-immortalwrt
+name: build breeze ipq
 
 on:
   repository_dispatch:
